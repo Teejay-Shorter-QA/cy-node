@@ -10,7 +10,7 @@ describe('CRUD movie', () => {
       .should('eq', 'Server is running')
   })
 
-  it('should', () => {
+  it('log to say', () => {
     cy.log('say hello')
   })
 })
