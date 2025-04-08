@@ -1,6 +1,6 @@
 {
   "uuid": "17f0c9ff-89f9-4682-a07b-47f4efece198",
-  "lastMigration": 32,
+  "lastMigration": 33,
   "name": "provider-mock",
   "endpointPrefix": "",
   "latency": 0,
@@ -80,7 +80,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "95a7a19a-167e-4b44-9389-30e11ccc554e",
@@ -150,7 +152,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "e6c27c44-7a74-4e02-84ef-5b4bc5c87e81",
@@ -224,7 +228,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "f076e69f-22a3-4b73-9798-d38404c97f2c",
@@ -294,7 +300,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "c5380a71-b614-4565-817a-c4f394cd26ff",
@@ -391,7 +399,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "cc4905c4-5029-4a00-8cc5-6cc8c9f98190",
@@ -461,7 +471,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "280bf17c-bfb7-44d3-b8ea-6ae59898dfc7",
@@ -531,7 +543,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "67ba0d87-21ba-452b-a91d-eb2a328b028e",
@@ -601,7 +615,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [

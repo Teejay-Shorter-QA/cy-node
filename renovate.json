@@ -4,7 +4,7 @@
   "rebaseWhen": "conflicted",
   "prHourlyLimit": 2,
   "updateNotScheduled": false,
-  "timezone": "America/New_York",
+  "timezone": "Europe/London",
   "schedule": ["after 10pm and before 5am on every weekday", "every weekend"],
   "masterIssue": true,
   "labels": ["type: dependencies", "renovate"],
