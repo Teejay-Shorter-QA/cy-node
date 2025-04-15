@@ -8,7 +8,6 @@
   "scripts": {
     "cy:open-local": "cypress open --e2e --browser chrome --config-file cypress/config/local.config.ts",
     "cy:run-local": "cypress run --e2e --browser chrome --config-file cypress/config/local.config.ts",
-    "mock:server": "npx mockoon-cli start --data ./mockoon/mock.json --port 3001",
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|ts|json)\"",
     "fix:format": "npm run prettier -- --write",
     "validate": "npm-run-all --parallel typecheck lint test fix:format",
@@ -24,7 +23,8 @@
     "@esbuild-plugins/node-globals-polyfill": "0.2.3",
     "@esbuild-plugins/node-modules-polyfill": "0.2.2",
     "@faker-js/faker": "9.6.0",
-    "@mockoon/cli": "9.2.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
     "@types/jest": "29.5.14",
     "@types/lodash": "4.17.16",
     "@types/node": "22.14.0",
@@ -48,10 +48,18 @@
     "eslint-plugin-prettier": "5.2.6",
     "jest": "29.7.0",
     "lodash": "4.17.21",
+    "nodemon": "^3.1.9",
     "npm-run-all2": "7.0.2",
     "prettier": "3.5.3",
     "ts-jest": "29.3.1",
+    "ts-node": "^10.9.2",
     "tsx": "^4.19.1",
     "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.6.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "prisma": "^6.6.0"
   }
 }
