@@ -8,6 +8,10 @@
   "scripts": {
     "cy:open-local": "cypress open --e2e --browser chrome --config-file cypress/config/local.config.ts",
     "cy:run-local": "cypress run --e2e --browser chrome --config-file cypress/config/local.config.ts",
+    "db:migrate": "npx prisma migrate reset --force --skip-seed generate",
+    "db:sync": "npx prisma db push --force-reset && npx prisma generate",
+    "db:reset": "tsx ./scripts/global-setup.ts",
+    "start": ". ./scripts/env-setup.sh && npm run db:sync && npm run db:reset && nodemon",
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|ts|json)\"",
     "fix:format": "npm run prettier -- --write",
     "validate": "npm-run-all --parallel typecheck lint test fix:format",
