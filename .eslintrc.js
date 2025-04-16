@@ -40,7 +40,7 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
-    semi: ['error', 'never'],
+    semi: ['error', 'always'],
     'import/default': 'off'
   }
-}
+};

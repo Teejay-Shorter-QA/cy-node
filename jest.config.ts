@@ -1,4 +1,4 @@
-import type { JestConfigWithTsJest } from 'ts-jest'
+import type { JestConfigWithTsJest } from 'ts-jest';
 
 export const config: JestConfigWithTsJest = {
   clearMocks: true,
@@ -36,6 +36,6 @@ export const config: JestConfigWithTsJest = {
   },
   testMatch: ['**/*.test.ts'],
   testEnvironment: 'node'
-}
+};
 
-export default config
+export default config;

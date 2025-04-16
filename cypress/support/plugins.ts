@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const cyDataSession = require('cypress-data-session/src/plugin')
+const cyDataSession = require('cypress-data-session/src/plugin');
 
 /**
  * The collection of plugins to use with Cypress
@@ -13,5 +13,5 @@ export default function plugins(
   return {
     // add plugins here
     ...cyDataSession(on, config)
-  }
+  };
 }

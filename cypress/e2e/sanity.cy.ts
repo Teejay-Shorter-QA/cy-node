@@ -1,16 +1,20 @@
-import { retryableBefore } from 'cy-retryable-before'
+import { retryableBefore } from 'cy-retryable-before';
 
 describe('CRUD movie', () => {
+  let tokenMessage: string;
   retryableBefore(() => {
     cy.api({
       method: 'GET',
       url: '/'
     })
       .its('body.message')
-      .should('eq', 'Server is running')
-  })
+      .should('eq', 'Server is running!');
+    cy.maybeGetToken('token-session').then((token) => {
+      tokenMessage = token;
+    });
+  });
 
-  it('log to say', () => {
-    cy.log('say hello')
-  })
-})
+  it('should', () => {
+    cy.log(tokenMessage);
+  });
+});
