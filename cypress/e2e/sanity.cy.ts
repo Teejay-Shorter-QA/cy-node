@@ -1,4 +1,4 @@
-import { retryableBefore } from 'cy-retryable-before'
+import { retryableBefore } from 'cy-retryable-before';
 
 describe('CRUD movie', () => {
   retryableBefore(() => {
@@ -7,10 +7,10 @@ describe('CRUD movie', () => {
       url: '/'
     })
       .its('body.message')
-      .should('eq', 'Server is running')
-  })
+      .should('eq', 'Server is running');
+  });
 
   it('should', () => {
-    cy.log('say hello')
-  })
-})
+    cy.log('say hello');
+  });
+});

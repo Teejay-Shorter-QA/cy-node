@@ -1,4 +1,4 @@
-export {}
+export {};
 
 declare global {
   namespace Cypress {
@@ -8,14 +8,14 @@ declare global {
       skipOn(
         nameOrFlag: string | boolean | (() => boolean),
         cb?: () => void
-      ): Chainable<Subject>
+      ): Chainable<Subject>;
 
       /** https://www.npmjs.com/package/@cypress/skip-test
        * `cy.onlyOn('localhost')` */
       onlyOn(
         nameOrFlag: string | boolean | (() => boolean),
         cb?: () => void
-      ): Chainable<Subject>
+      ): Chainable<Subject>;
     }
   }
 }
