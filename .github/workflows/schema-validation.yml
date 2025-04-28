@@ -1,0 +1,63 @@
+name: run schema validation
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }} && ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  schema-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+      - name: Read Node version from .nvmrc
+        id: node_version
+        run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_ENV
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate OpenAPI docs from code
+        run: npm run generate:openapi
+
+      - name: Check if OpenAPI docs have changed
+        id: check_changes
+        run: |
+          if git diff --quiet src/api-docs/openapi.json src/api-docs/openapi.yaml; then
+            echo "No changes in OpenAPI docs"
+            echo "changed=false" >> $GITHUB_ENV
+          else
+            echo "OpenAPI docs have changed"
+            echo "changed=true" >> $GITHUB_ENV
+          fi
+
+      - name: Comit and push OpenAPI changes
+        if: env.changed == 'true'
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: 'Github Actions'
+          author_email: 'actions@github.com'
+          message: 'Update OpenAPI docs'
+          add: 'src/api-docs/openapi.json src/api-docs/openapi.yaml'
+          push: true
+          github_token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Create empty commit to re-run checks
+        if: env.changed == 'true'
+        run: |
+          git commit --allow-empty -m "Re-run checks after OpenAPI docs update"
+          git push
+
+      - name: Fetch main branch for Optic
+        run: git fetch --depth=1 origin main:main
+
+      - name: Optic diff
+        run: npm run optic:diff
