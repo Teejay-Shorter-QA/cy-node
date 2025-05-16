@@ -69,18 +69,18 @@ export const GetMovieResponseUnionSchema = z
       .number()
       .int()
       .openapi({ example: 200, description: 'Response status code' }),
-    data: z.union([
-      z
-        .object(movieObj)
-        .nullable()
-        .openapi({
-          example: { id: 1, name: 'Inception', year: 2010, rating: 7.5 }
-        }),
-      z.array(z.object(movieObj)).openapi({
-        example: [],
-        description: 'List of movies or an empty array'
+    data: z
+      .object(movieObj)
+      .nullable()
+      .openapi({
+        example: { id: 1, name: 'Inception', year: 2010, rating: 7.5 }
       })
-    ]),
+      .or(
+        z.array(z.object(movieObj)).openapi({
+          example: [],
+          description: 'List of movies or an empty array'
+        })
+      ),
     error: z.string().nullable().optional().openapi({
       example: null,
       description: 'Error message occurred, otherwise null'
