@@ -11,7 +11,7 @@ import type {
 
 export interface MovieRepository {
   getMovies(): Promise<GetMovieResponse>;
-  getMovieById(id: string): Promise<GetMovieResponse | MovieNotFoundResponse>;
+  getMovieById(id: number): Promise<GetMovieResponse | MovieNotFoundResponse>;
   getMovieByName(
     name: string
   ): Promise<GetMovieResponse | MovieNotFoundResponse>;

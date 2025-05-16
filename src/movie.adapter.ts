@@ -1,5 +1,5 @@
-import type { PrismaClient } from '@prisma/client';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/react-native.js';
+import type { PrismaClient } from './generated/prisma';
+import { PrismaClientKnownRequestError } from './generated/prisma/runtime/library';
 import type {
   ConflictMovieResponse,
   CreateMovieRequest,
@@ -65,7 +65,7 @@ export class MovieAdapter implements MovieRepository {
 
   // Get movie by ID
   async getMovieById(
-    id: string
+    id: number
   ): Promise<GetMovieResponse | MovieNotFoundResponse> {
     try {
       const movie = await this.prisma.movie.findUnique({ where: { id } });
@@ -126,7 +126,7 @@ export class MovieAdapter implements MovieRepository {
     id: number
   ): Promise<DeleteMovieResponse | MovieNotFoundResponse> {
     try {
-      await this.prisma.movie.findUnique({ where: { id } });
+      await this.prisma.movie.delete({ where: { id } });
       return {
         status: 200,
         message: `Movie ID: ${id} deleted successfully`
@@ -152,7 +152,7 @@ export class MovieAdapter implements MovieRepository {
   ): Promise<CreateMovieResponse | ConflictMovieResponse> {
     try {
       // Check if the movie already exists
-      const existingMovie = await this.prisma.movie.findUnique({
+      const existingMovie = await this.prisma.movie.findFirst({
         where: { name: data.name, year: data.year, rating: data.rating }
       });
       if (existingMovie) {
@@ -162,9 +162,12 @@ export class MovieAdapter implements MovieRepository {
         };
       }
 
+      // Get list of all movies to assign new unique value to the id as movies.length
       const movies = await this.prisma.movie.findMany();
       const movie = await this.prisma.movie.create({
-        data: data.id ? { ...data, id: movies.length } : data
+        data: data.id
+          ? { ...data, id: data.id }
+          : { ...data, id: movies.length }
       });
       return {
         status: 200,
