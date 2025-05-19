@@ -2,7 +2,7 @@ import type { Movie } from './generated/prisma';
 import { Prisma, PrismaClient } from './generated/prisma';
 import type { DeepMockProxy } from 'jest-mock-extended';
 import { mockDeep } from 'jest-mock-extended';
-import { MovieAdapter } from './movie.adapter';
+import { MovieAdapter } from './movie-adapter';
 import {
   generateMovieWithId,
   generateMovieWithoutId
