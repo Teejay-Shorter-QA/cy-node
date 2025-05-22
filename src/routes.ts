@@ -1,6 +1,7 @@
 import type { Movie } from './generated/prisma';
 import { PrismaClient } from './generated/prisma';
-import { RequestHandler, Router } from 'express';
+import type { Request, Response, RequestHandler } from 'express';
+import { Router } from 'express';
 import type {
   ConflictMovieResponse,
   CreateMovieResponse,
@@ -13,8 +14,8 @@ import { authMiddleware } from './middleware/auth-middleware';
 import { validateId } from './middleware/validate-movie-id';
 import { MovieAdapter } from './movie-adapter';
 import { MovieService } from './movie-service';
-import { formatResponse } from './utils/format-resposnse';
-import { produceMovieEvent } from './events/movie-events';
+import { formatResponse } from './utils/format-response';
+//import { produceMovieEvent } from './events/movie-events';
 
 export const moviesRoute = Router();
 
@@ -29,22 +30,22 @@ const movieService = new MovieService(movieAdapter);
 // Routes are focues on handling HTTP requests and responses
 // Business logic is delegated to the MoviesService
 // GET /
-moviesRoute.get('/', async (req, res) => {
+moviesRoute.get('/', async (req: Request, res: Response): Promise<void> => {
   const name = req.query.name;
 
   if (typeof name === 'string') {
     const movie = await movieService.getMovieByName(name);
-    return formatResponse(res, movie as GetMovieResponse);
+    formatResponse(res, movie as GetMovieResponse);
   } else if (name) {
-    return res.status(400).json({ error: 'Invalid movie name provided' });
+    formatResponse(res, { status: 400, error: 'Invalid movie name provided' });
   } else {
     const allMovies = await movieService.getMovies();
-    return formatResponse(res, allMovies as GetMovieResponse);
+    formatResponse(res, allMovies as GetMovieResponse);
   }
 });
 
 // POST /
-moviesRoute.post('/', async (req, res) => {
+moviesRoute.post('/', async (req, res): Promise<void> => {
   const result = await movieService.createMovie(req.body as Movie);
   /**
    * Do Kafka stuff her
@@ -54,20 +55,18 @@ moviesRoute.post('/', async (req, res) => {
       await produceMovieEvent(movie, 'movie-created');
     }
     */
-  return formatResponse(
-    res,
-    result as CreateMovieResponse | ConflictMovieResponse
-  );
+  formatResponse(res, result as CreateMovieResponse | ConflictMovieResponse);
 });
 
 // GET /:id
-moviesRoute.get('/:id', validateId as RequestHandler, async (req, res) => {
-  const result = await movieService.getMovieById(Number(req.params.id));
-  return formatResponse(
-    res,
-    result as GetMovieResponse | MovieNotFoundResponse
-  );
-});
+moviesRoute.get(
+  '/:id',
+  validateId as RequestHandler,
+  async (req, res): Promise<void> => {
+    const result = await movieService.getMovieById(Number(req.params.id));
+    formatResponse(res, result as GetMovieResponse | MovieNotFoundResponse);
+  }
+);
 
 // PUT /:id
 moviesRoute.put('/:id', validateId as RequestHandler, async (req, res) => {
@@ -83,7 +82,7 @@ moviesRoute.put('/:id', validateId as RequestHandler, async (req, res) => {
       await produceMovieEvent(movie, 'movie-created');
     }
     */
-  return formatResponse(
+  formatResponse(
     res,
     result as
       | UpdateMovieResponse
@@ -93,14 +92,17 @@ moviesRoute.put('/:id', validateId as RequestHandler, async (req, res) => {
 });
 
 //DELETE /:id
-moviesRoute.delete('/:id', validateId as RequestHandler, async (req, res) => {
-  const movieId = Number(req.params.id);
-  const movieResponse = await movieService.getMovieById(movieId);
+moviesRoute.delete(
+  '/:id',
+  validateId as RequestHandler,
+  async (req, res): Promise<void> => {
+    const movieId = Number(req.params.id);
+    const movieResponse = await movieService.getMovieById(movieId);
 
-  if ('data' in movieResponse && movieResponse.data) {
-    //const movie = movieResponse.data as Movie;
-    const result = await movieService.deleteMovieById(movieId);
-    /**
+    if ('data' in movieResponse && movieResponse.data) {
+      //const movie = movieResponse.data as Movie;
+      const result = await movieService.deleteMovieById(movieId);
+      /**
    * Do Kafka stuff her
     if ('data' in result) {
       const movie = result.data;
@@ -108,12 +110,13 @@ moviesRoute.delete('/:id', validateId as RequestHandler, async (req, res) => {
       await produceMovieEvent(movie, 'movie-created');
     }
     */
-    return formatResponse(res, result as DeleteMovieResponse);
-  } else {
-    //return formatResponse(res, movieResponse as MovieNotFoundResponse);
-    return formatResponse(res, {
-      status: 404,
-      error: `Movie ID: ${movieId} not found`
-    });
+      formatResponse(res, result as DeleteMovieResponse);
+    } else {
+      //return formatResponse(res, movieResponse as MovieNotFoundResponse);
+      formatResponse(res, {
+        status: 404,
+        error: `Movie ID: ${movieId} not found`
+      });
+    }
   }
-});
+);

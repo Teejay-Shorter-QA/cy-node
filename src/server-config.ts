@@ -1,5 +1,6 @@
 import cors from 'cors';
 import express, { json } from 'express';
+import { moviesRoute } from './routes';
 
 const server = express();
 server.use(
@@ -12,6 +13,8 @@ server.use(json());
 server.get('/', (_req, res) => {
   res.status(200).json({ message: 'Server is running!' });
 });
+
+server.use('/movies', moviesRoute);
 
 server.get(
   '/auth/fake-token',
