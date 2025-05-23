@@ -6,7 +6,78 @@
 GET {{baseUrl}}/auth/fake-token 
 
 ###
+@token = {{generateToken.response.body.token}}
+
+###
 # @name heartbeat
 # Simple request to check if the server is running
 GET {{baseUrl}}
 
+###
+# @name createMovie
+POST {{baseUrl}}/movies
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "name": "Inception",
+    "year": 2010,
+    "rating": 7.5
+}
+
+###
+@movieId = {{getAllMovies.response.body.data.0.id}}
+@movieName = {{getAllMovies.response.body.data.0.name}}
+
+###
+# @name getAllMovies
+GET {{baseUrl}}/movies
+Authorization: {{token}}
+
+###
+# @name getMovieById
+GET {{baseUrl}}/movies/{{movieId}}
+Authorization: {{token}}
+
+###
+# @name testGetMovieNotFound
+GET {{baseUrl}}/movies/999
+Authorization: {{token}}
+
+###
+# @name getMovieByName
+GET {{baseUrl}}/movies?name={{movieName}}
+Authorization: {{token}}
+
+###
+# @name testInvalidYear
+POST {{baseUrl}}/movies
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "name": "Invalid Year",
+    "year": 1899,
+    "rating": 3.2
+}
+
+###
+# @name updateMovie
+PUT {{baseUrl}}/movies/{{movieId}}
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "name": "Inception Updated",
+    "rating": 8.0
+}
+
+###
+# @name deleteMovie
+DELETE {{baseUrl}}/movies/{{movieId}}
+Authorization: {{token}}
+
+###
+# @name testDeleteNotFoundMovie
+DELETE {{baseUrl}}/movies/999
+Authorization: {{token}}

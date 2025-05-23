@@ -59,6 +59,7 @@ const movieObj = {
   name: z.string().openapi({ example: 'Inception', description: 'Movie name' }),
   year: z
     .number()
+    .int()
     .openapi({ example: 2010, description: 'Movie release year' }),
   rating: z.number().openapi({ example: 7.5, description: 'Movie rating' })
 };
@@ -137,21 +138,7 @@ export const UpdateMovieResponseSchema = z
       .number()
       .int()
       .openapi({ example: 200, description: 'Response status code' }),
-    data: z
-      .object({
-        id: z.number().openapi({ example: 1, description: 'Movie ID' }),
-        name: z
-          .string()
-          .openapi({ example: 'Inception', description: 'Movie name' }),
-        year: z
-          .number()
-          .int()
-          .openapi({ example: 2010, description: 'Movie release year' }),
-        rating: z
-          .number()
-          .openapi({ example: 7.5, description: 'Movie rating' })
-      })
-      .openapi('UpdatedMovieData'),
+    data: z.object(movieObj),
     error: z
       .string()
       .optional()

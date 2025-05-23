@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Movies API",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "API for managing movies"
   },
   "servers": [
@@ -142,7 +142,7 @@
                     "example": "Inception"
                   },
                   "year": {
-                    "type": "number",
+                    "type": "integer",
                     "description": "Movie release year",
                     "example": 2010
                   },
@@ -175,7 +175,7 @@
                       "example": "Inception"
                     },
                     "year": {
-                      "type": "number",
+                      "type": "integer",
                       "description": "Movie release year",
                       "example": 2010
                     },
@@ -260,37 +260,6 @@
           }
         }
       },
-      "UpdatedMovieData": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "description": "Movie ID",
-            "example": 1
-          },
-          "name": {
-            "type": "string",
-            "description": "Movie name",
-            "example": "Inception"
-          },
-          "year": {
-            "type": "integer",
-            "description": "Movie release year",
-            "example": 2010
-          },
-          "rating": {
-            "type": "number",
-            "description": "Movie rating",
-            "example": 7.5
-          }
-        },
-        "required": [
-          "id",
-          "name",
-          "year",
-          "rating"
-        ]
-      },
       "UpdateMovieResponse": {
         "type": "object",
         "properties": {
@@ -300,7 +269,35 @@
             "example": 200
           },
           "data": {
-            "$ref": "#/components/schemas/UpdatedMovieData"
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "Movie ID",
+                "example": 1
+              },
+              "name": {
+                "type": "string",
+                "description": "Movie name",
+                "example": "Inception"
+              },
+              "year": {
+                "type": "integer",
+                "description": "Movie release year",
+                "example": 2010
+              },
+              "rating": {
+                "type": "number",
+                "description": "Movie rating",
+                "example": 7.5
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "year",
+              "rating"
+            ]
           },
           "error": {
             "type": "string",
@@ -340,7 +337,35 @@
             "example": 200
           },
           "data": {
-            "$ref": "#/components/schemas/UpdatedMovieData"
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "Movie ID",
+                "example": 1
+              },
+              "name": {
+                "type": "string",
+                "description": "Movie name",
+                "example": "Inception"
+              },
+              "year": {
+                "type": "integer",
+                "description": "Movie release year",
+                "example": 2010
+              },
+              "rating": {
+                "type": "number",
+                "description": "Movie rating",
+                "example": 7.5
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "year",
+              "rating"
+            ]
           },
           "error": {
             "type": "string",

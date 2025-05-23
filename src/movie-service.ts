@@ -53,7 +53,7 @@ export class MovieService {
     id: number,
     data: UpdateMovieRequest
   ): Promise<
-    UpdateMovieResponse | MovieNotFoundResponse | CreateMovieResponse
+    UpdateMovieResponse | MovieNotFoundResponse | ConflictMovieResponse
   > {
     const validationResult = validateSchema(UpdateMovieSchema, data);
     if (!validationResult.success) {
@@ -71,6 +71,7 @@ function validateSchema<T>(
   if (result.success) {
     return { success: true, data: result.data };
   } else {
+    console.log('Validation Error: ' + result.error);
     const errorMessages = result.error.errors
       .map((err) => err.message)
       .join(', ');
