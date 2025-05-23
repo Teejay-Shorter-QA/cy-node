@@ -7,11 +7,18 @@ concurrency:
   group: ${{ github.ref }} && ${{ github.workflow }}
   cancel-in-progress: true
 
+  # Needed for commit and push OpenAPI changes
+permissions:
+  contents: write
+
 jobs:
   schema-validation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          persist-credentials: true
 
       - uses: actions/setup-node@v4
       - name: Read Node version from .nvmrc
