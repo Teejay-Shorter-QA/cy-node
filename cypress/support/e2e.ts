@@ -12,7 +12,6 @@ const commonHeaders = (token: string) => ({
 
 Cypress.Commands.add(
   'createMovie',
-  //@ts-expect-error silence ts error
   (token: string, movieData: CreateMovieRequest, allowedToFail = false) => {
     cy.log('**createMovie**');
     return cy.api({
@@ -28,7 +27,6 @@ Cypress.Commands.add(
 
 Cypress.Commands.add(
   'deleteMovie',
-  //@ts-expect-error silence ts error
   (token: string, id: number, allowedToFail = false) => {
     cy.log(`**deleteMovie: ${id}**`);
     return cy.api({
@@ -43,7 +41,6 @@ Cypress.Commands.add(
 
 Cypress.Commands.add(
   'getMovieById',
-  //@ts-expect-error silence ts error
   (token: string, id: number, allowedToFail = false) => {
     cy.log(`**getMovieById: ${id}**`);
     return cy.api({
@@ -58,7 +55,6 @@ Cypress.Commands.add(
 
 Cypress.Commands.add(
   'getMovieByName',
-  //@ts-expect-error silence ts error
   (token: string, name: string, allowedToFail = false) => {
     cy.log(`**getMovieByName: ${name}**`);
     return cy.api({
@@ -72,7 +68,6 @@ Cypress.Commands.add(
   }
 );
 
-//@ts-expect-error silence ts error
 Cypress.Commands.add('getMovies', (token: string, allowedToFail = false) => {
   cy.log('**getAllMovies**');
   return cy.api({
@@ -86,7 +81,6 @@ Cypress.Commands.add('getMovies', (token: string, allowedToFail = false) => {
 
 Cypress.Commands.add(
   'updateMovie',
-  //@ts-expect-error silence ts error
   (
     token: string,
     id: number,

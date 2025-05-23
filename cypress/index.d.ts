@@ -68,7 +68,7 @@ declare global {
         token: string,
         movieData: CreateMovieRequest,
         allowedToFail?: boolean
-      ): Chainable<CreateMovieResponse>;
+      ): Chainable<Response<CreateMovieResponse> & Messages>;
 
       /**
        * Delete a movie by ID
@@ -84,7 +84,7 @@ declare global {
         token: string,
         id: number,
         allowedToFail?: boolean
-      ): Chainable<DeleteMovieResponse>;
+      ): Chainable<Response<DeleteMovieResponse> & Messages>;
 
       /**
        * Get a movie by ID
@@ -100,7 +100,7 @@ declare global {
         token: string,
         id: number,
         allowedToFail?: boolean
-      ): Chainable<GetMovieResponse>;
+      ): Chainable<Response<GetMovieResponse> & Messages>;
 
       /**
        * Get a movie by name
@@ -116,7 +116,7 @@ declare global {
         token: string,
         name: string,
         allowedToFail?: boolean
-      ): Chainable<GetMovieResponse>;
+      ): Chainable<Response<GetMovieResponse> & Messages>;
 
       /**
        * Get a list of all movies
@@ -130,7 +130,7 @@ declare global {
       getMovies(
         token: string,
         allowedToFail?: boolean
-      ): Chainable<GetMovieResponse>;
+      ): Chainable<Response<GetMovieResponse> & Messages>;
 
       /**
        * Update an existing movie with new data
@@ -148,7 +148,7 @@ declare global {
         id: number,
         movieData: UpdateMovieRequest,
         allowedToFail?: boolean
-      ): Chainable<UpdateMovieResponse>;
+      ): Chainable<Response<UpdateMovieResponse> & Messages>;
 
       //#endregion API - Movies
       //#endregion API
