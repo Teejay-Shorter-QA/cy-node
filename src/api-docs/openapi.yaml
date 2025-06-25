@@ -152,6 +152,7 @@ components:
             - string
             - "null"
           description: Error message occurred, otherwise null
+          example: null
       required:
         - status
         - data
