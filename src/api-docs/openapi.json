@@ -205,7 +205,8 @@
               "string",
               "null"
             ],
-            "description": "Error message occurred, otherwise null"
+            "description": "Error message occurred, otherwise null",
+            "example": null
           }
         },
         "required": [
