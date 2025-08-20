@@ -41,7 +41,7 @@
     "@useoptic/optic": "^1.0.6",
     "cy-retryable-before": "^1.0.2",
     "cy-spok": "1.6.2",
-    "cypress": "14.4.1",
+    "cypress": "15.0.0",
     "cypress-ajv-schema-validator": "^2.0.1",
     "cypress-data-session": "2.8.7",
     "cypress-map": "1.49.0",
