@@ -34,7 +34,7 @@
           "year": {
             "type": "integer",
             "minimum": 1900,
-            "maximum": 2025,
+            "maximum": 2026,
             "description": "Movie release year",
             "example": 2010
           },
@@ -249,7 +249,7 @@
           "year": {
             "type": "integer",
             "minimum": 1900,
-            "maximum": 2025,
+            "maximum": 2026,
             "description": "Movie release year",
             "example": 2010
           },
