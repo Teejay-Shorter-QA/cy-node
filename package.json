@@ -43,7 +43,7 @@
     "cy-spok": "1.6.2",
     "cypress": "15.0.0",
     "cypress-ajv-schema-validator": "^2.0.1",
-    "cypress-data-session": "2.8.7",
+    "cypress-data-session": "3.0.0",
     "cypress-map": "1.49.0",
     "cypress-recurse": "^1.35.3",
     "dotenv": "17.0.0",
