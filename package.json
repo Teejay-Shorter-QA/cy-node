@@ -74,6 +74,6 @@
     "express": "^5.1.0",
     "jest-mock-extended": "^4.0.0-beta1",
     "prisma": "^6.6.0",
-    "zod": "^3.24.3"
+    "zod": "^4.0.0"
   }
 }
